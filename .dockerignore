@@ -1,0 +1,15 @@
+.git
+.gitignore
+.next
+node_modules
+npm-debug.log*
+README.md
+PLAN.md
+CLAUDE.md
+AGENTS.md
+docker-compose.yml
+Dockerfile
+.env*
+!.env.example
+public/uploads/*
+!public/uploads/.gitkeep
