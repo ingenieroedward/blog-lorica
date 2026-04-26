@@ -35,6 +35,14 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Copy migration script + SQL files (drizzle-orm and pg are already in standalone node_modules)
+COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
+COPY --from=builder --chown=nextjs:nodejs /app/src/db/migrations ./scripts/migrations
+
+# Entrypoint that runs migrations then starts the server
+COPY --chown=nextjs:nodejs docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x ./docker-entrypoint.sh
+
 # Ensure uploads directory exists and is writable
 RUN mkdir -p ./public/uploads && chown nextjs:nodejs ./public/uploads
 
@@ -44,4 +52,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD ["./docker-entrypoint.sh"]
