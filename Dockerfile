@@ -48,8 +48,8 @@ RUN mkdir -p ./public/uploads && chown nextjs:nodejs ./public/uploads
 
 USER nextjs
 
-EXPOSE 3000
-ENV PORT=3000
+EXPOSE 3013
+ENV PORT=3013
 ENV HOSTNAME="0.0.0.0"
 
 CMD ["./docker-entrypoint.sh"]
