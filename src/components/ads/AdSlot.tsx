@@ -9,7 +9,7 @@ type Props = {
 }
 
 export async function AdSlot({ position, className, label = false }: Props) {
-  const ad = await getActiveAdByPosition(position)
+  const ad = await getActiveAdByPosition(position).catch(() => null)
 
   // No active ad — in production show nothing, in dev show placeholder
   if (!ad) {
