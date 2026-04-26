@@ -4,11 +4,13 @@ import { getAllPostSlugs } from '@/lib/posts'
 import { getAllCategorySlugs } from '@/lib/categories'
 import { getAllAuthorSlugs } from '@/lib/authors'
 
+export const dynamic = 'force-dynamic'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [postSlugs, categorySlugs, authorSlugs] = await Promise.all([
-    getAllPostSlugs(),
-    getAllCategorySlugs(),
-    getAllAuthorSlugs(),
+    getAllPostSlugs().catch(() => []),
+    getAllCategorySlugs().catch(() => []),
+    getAllAuthorSlugs().catch(() => []),
   ])
 
   const staticPages: MetadataRoute.Sitemap = [
