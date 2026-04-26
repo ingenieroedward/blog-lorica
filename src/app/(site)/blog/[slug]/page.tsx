@@ -13,13 +13,15 @@ import { ArticleWithAds } from '@/components/ads/ArticleWithAds'
 
 type Props = { params: Promise<{ slug: string }> }
 
-// Slugs no pre-generados devuelven 404 real.
-// Nuevos artículos se activan vía el webhook /api/revalidate.
-export const dynamicParams = false
+export const dynamicParams = true
 
 export async function generateStaticParams() {
-  const slugs = await getAllPostSlugs()
-  return slugs.map(({ slug }) => ({ slug }))
+  try {
+    const slugs = await getAllPostSlugs()
+    return slugs.map(({ slug }) => ({ slug }))
+  } catch {
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

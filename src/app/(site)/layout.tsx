@@ -4,7 +4,7 @@ import { Footer } from '@/components/layout/Footer'
 import { AdSlot } from '@/components/ads/AdSlot'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const categories = await getCategories()
+  const categories = await getCategories().catch(() => [])
 
   const navItems = categories.map((cat) => ({
     label: cat.name,

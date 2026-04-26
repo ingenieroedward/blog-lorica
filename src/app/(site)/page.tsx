@@ -8,8 +8,8 @@ export const revalidate = 3600
 
 export default async function HomePage() {
   const [posts, categories] = await Promise.all([
-    getPosts({ limit: 7 }),
-    getCategories(),
+    getPosts({ limit: 7 }).catch(() => []),
+    getCategories().catch(() => []),
   ])
 
   return (
