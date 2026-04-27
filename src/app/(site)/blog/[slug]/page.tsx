@@ -10,6 +10,7 @@ import { RelatedPosts } from '@/components/blog/RelatedPosts'
 import { TableOfContents } from '@/components/blog/TableOfContents'
 import { AdSlot } from '@/components/ads/AdSlot'
 import { ArticleWithAds } from '@/components/ads/ArticleWithAds'
+import { ShareButtons } from '@/components/blog/ShareButtons'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -251,6 +252,14 @@ export default async function ArticlePage({ params }: Props) {
                 </div>
               </footer>
             )}
+
+            {/* Compartir */}
+            <div
+              className="mt-10 pt-8 border-t"
+              style={{ borderColor: 'var(--color-border)' }}
+            >
+              <ShareButtons url={url} title={post.title} />
+            </div>
 
             {/* AuthorCard — E-E-A-T */}
             <AuthorCard
